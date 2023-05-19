@@ -230,6 +230,13 @@ async function getPostById(postId) {
       [postId]
     );
 
+    if (!post) {
+      throw {
+        name: "PostNotFoundError",
+        message: "Could not find a post with that postId",
+      };
+    }
+
     const {
       rows: [author],
     } = await client.query(
@@ -386,6 +393,7 @@ module.exports = {
   updatePost,
   getAllPosts,
   getPostsByUser,
+  getPostById,
   getPostsByTagName,
   createTags,
   getAllTags,
