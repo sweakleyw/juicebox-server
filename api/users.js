@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const { getUserByUsername } = require("../db");
 const { JWT_SECRET } = process.env;
 
+const bcrypt = require("bcrypt");
+
 const express = require("express");
 const usersRouter = express.Router();
 
@@ -36,9 +38,11 @@ usersRouter.post("/register", async (req, res, next) => {
       });
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = await createUser({
       username,
-      password,
+      password: hashedPassword,
       name,
       location,
     });
