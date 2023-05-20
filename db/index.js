@@ -2,9 +2,10 @@ require("dotenv").config();
 const { Client } = require("pg");
 
 const client = new Client(
-  process.env.NODE_ENV === "dev"
-    ? "postgres://postgres:postgres@localhost:5432/juicebox_dev"
-    : process.env.DB_URL
+  // process.env.NODE_ENV === "dev"
+  //   ? "postgres://postgres:postgres@localhost:5432/juicebox_dev"
+  //   :
+  process.env.DB_URL
 );
 
 /**
